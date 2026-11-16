@@ -749,33 +749,6 @@ img.is-broken { opacity: 0 !important; }
 .tl-card .kind { color: var(--gold); }
 .on-dark .card .icon { background: rgba(230,69,76,.14); color: var(--red-bright); }
 
-/* ---------- Brand preview: current logo vs refreshed brand ---------- */
-.logo-fresh { display: none; align-items: center; gap: 10px; }
-.brand-sun { fill: var(--ember); }
-[data-brand="fresh"] .logo-classic { display: none; }
-[data-brand="fresh"] .logo-fresh { display: inline-flex; }
-[data-brand="fresh"] {
-  --ember: #ff4f1f;
-  --ember-deep: #d83b10;
-  --red-bright: #ff6a3d;
-}
-.brand-footer .brand-word { font-size: 32px; }
-.brand-footer .brand-mark { width: 44px; height: 44px; }
-
-.brand-switch {
-  position: fixed; left: 16px; bottom: 16px; z-index: 150;
-  display: flex; align-items: center; gap: 2px; padding: 4px;
-  border-radius: 999px; background: rgba(15,13,11,.88); color: var(--white);
-  -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
-  box-shadow: 0 10px 30px -10px rgba(0,0,0,.6), 0 0 0 1px var(--line-light);
-  font-size: 13px;
-}
-.brand-switch > span { padding: 0 8px 0 10px; color: var(--muted-light); }
-.brand-switch button { border: 0; background: none; color: var(--white); padding: 7px 13px; border-radius: 999px; font-weight: 600; opacity: .7; }
-.brand-switch button:hover { opacity: 1; }
-.brand-switch button[aria-pressed="true"] { background: var(--ember); opacity: 1; }
-body.menu-open .brand-switch { display: none; }
-.in-frame .brand-switch { display: none; }
 
 /* Podcast: platforms, episode library, Habakkuk steps */
 .listen-on { display: flex; flex-wrap: wrap; gap: 8px; margin: 28px 0 0; padding: 0; }
