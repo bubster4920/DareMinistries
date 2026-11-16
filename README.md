@@ -14,7 +14,7 @@ The website for [dareministries.org](https://dareministries.org): a fast, static
 | `/ministries/worship/` | Worship collective & internship |
 | `/ministries/podcast/` | Yet I Will Rejoice |
 | `/ministries/uganda/` | Uganda youth conference + sponsor calculator |
-| `/resources/` | Study library, Truth in Two, apologetics, blog, care |
+| `/resources/` | Study library, apologetics, blog, care |
 | `/resources/blog/<post>/` | Blog posts (13 articles carried over from the old site) |
 | `/give/` | Giving funds |
 | `/connect/` | Contact form, emails, map |
