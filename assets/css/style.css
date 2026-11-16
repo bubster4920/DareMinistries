@@ -322,6 +322,20 @@ body.menu-open .site-header { color: var(--white); background: transparent; box-
 .prose h3 { margin: 1.6em 0 .5em; }
 .prose ul { padding-left: 1.2em; margin-bottom: 1em; }
 .prose li { margin-bottom: .4em; }
+.post-hero .display { max-width: 22ch; font-size: clamp(34px, 5vw, 64px); }
+.post-meta { color: #d9cfc2; margin-top: 18px; font-size: 15px; letter-spacing: .02em; }
+.post-body { max-width: 68ch; }
+.post-body p { font-size: 18px; line-height: 1.75; margin-bottom: 1.15em; }
+.post-body blockquote { border-left: 3px solid var(--ember); margin: 1.6em 0; padding: .2em 0 .2em 1.3em; font-style: italic; }
+.post-body blockquote p { margin: 0; color: #3d372f; }
+.post-body a { color: var(--ember); }
+.post-credit { font-size: 13.5px; color: var(--muted); margin-top: 2em; }
+.post-nav { display: flex; justify-content: space-between; gap: 24px; flex-wrap: wrap; margin-top: 52px; padding-top: 26px; border-top: 1px solid var(--line); }
+.post-nav a { display: grid; gap: 4px; max-width: 28ch; text-decoration: none; }
+.post-nav a:last-child { text-align: right; margin-left: auto; }
+.post-nav small { font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--ember); font-weight: 600; }
+.post-nav span { font-weight: 600; line-height: 1.25; }
+.post-all { margin-top: 28px; }
 
 .photo-stack { position: relative; aspect-ratio: 4 / 4.4; }
 .photo-stack figure { position: absolute; margin: 0; border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); background: var(--ink-3); }

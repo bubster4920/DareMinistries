@@ -14,14 +14,15 @@ The website for [dareministries.org](https://dareministries.org): a fast, static
 | `/ministries/worship/` | Worship collective & internship |
 | `/ministries/podcast/` | Yet I Will Rejoice |
 | `/ministries/uganda/` | Uganda youth conference + sponsor calculator |
-| `/resources/` | Study library, Truth in Two, apologetics, blog, newsletter archive, care |
+| `/resources/` | Study library, Truth in Two, apologetics, blog, care |
+| `/resources/blog/<post>/` | Blog posts (13 articles carried over from the old site) |
 | `/give/` | Giving funds |
 | `/connect/` | Contact form, emails, map |
 | `/privacy/` | Privacy policy |
 
 ## Editing
 
-Page content lives in `src/pages/*.html`; the shared header and footer live in `src/layout.html`.
+Page content lives in `src/pages/*.html`; blog posts are plain-text files in `src/posts/` (a `key: value` header, a `---` line, then paragraphs; `## ` makes a heading, `> ` a quote, `[text](url)` a link) and are turned into pages by the same build; the shared header and footer live in `src/layout.html`.
 After editing, rebuild the HTML:
 
 ```sh
