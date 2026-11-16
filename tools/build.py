@@ -20,7 +20,8 @@ HEADER_RE = re.compile(r"^\s*<!--(\{.*?\})-->\s*", re.S)
 
 ASSET_RE = re.compile(r'(assets/(?:css|js)/[\w-]+\.(?:css|js))"')
 
-NAV_KEYS = ["home", "about", "ministries", "resources", "connect", "give"]
+NAV_KEYS = ["home", "about", "ministries", "resources", "blog", "connect", "give"]
+POSTS = []  # filled by main() before pages are built
 
 
 def asset_hash(rel):
@@ -58,6 +59,8 @@ def build_text(name, text, layout):
     for key in NAV_KEYS:
         current = ' aria-current="page"' if meta.get("nav") == key else ""
         html = html.replace("{{current_" + key + "}}", current)
+    html = html.replace("{{latest_posts}}", post_cards(POSTS[:3]))
+    html = html.replace("{{all_posts}}", post_cards(POSTS))
     html = html.replace("{{root}}", root)
     # Version stylesheet/script URLs by content so browsers never pair new HTML with stale CSS/JS.
     html = ASSET_RE.sub(lambda m: f'{m.group(1)}?v={asset_hash(m.group(1))}"', html)
@@ -101,11 +104,25 @@ def load_posts():
     return posts
 
 
+def post_cards(posts):
+    """Card markup for a list of posts; {{root}} is resolved later by build_text."""
+    cards = []
+    for i, p in enumerate(posts):
+        y, m, d = (int(x) for x in p["date"].split("-"))
+        pretty = f"{MONTHS[m - 1][:3]} {d}, {y}"
+        cards.append(
+            f'          <a class="post-card" href="{{{{root}}}}resources/blog/{p["slug"]}/" data-reveal style="--d:{(i % 3) * 0.06:.2f}s">\n'
+            f'            <div class="thumb"><img src="{{{{root}}}}{p["image"]}" alt="" loading="lazy"></div>\n'
+            f'            <div class="body"><time datetime="{p["date"]}">{pretty}</time><h3>{inline(p["title"])}</h3><p>{inline(p["excerpt"])}</p></div>\n'
+            f'          </a>')
+    return "\n".join(cards)
+
+
 def render_post(post, newer, older):
     y, m, d = (int(x) for x in post["date"].split("-"))
     pretty = f"{MONTHS[m - 1]} {d}, {y}"
     header = json.dumps({
-        "path": f"resources/blog/{post['slug']}/", "title": post["title"], "nav": "resources",
+        "path": f"resources/blog/{post['slug']}/", "title": post["title"], "nav": "blog",
         "class": "post", "description": post["excerpt"],
     })
     credit = f'<p class="post-credit">{inline(post["credit"])}</p>' if post.get("credit") else ""
@@ -117,7 +134,7 @@ def render_post(post, newer, older):
     <section class="page-hero post-hero grain">
       <div class="bg"><img src="{{{{root}}}}{post['image']}" alt=""></div>
       <div class="container">
-        <ol class="breadcrumb"><li><a href="{{{{root}}}}">Home</a></li><li><a href="{{{{root}}}}resources/">Resources</a></li><li><a href="{{{{root}}}}resources/#blog">Blog</a></li></ol>
+        <ol class="breadcrumb"><li><a href="{{{{root}}}}">Home</a></li><li><a href="{{{{root}}}}blog/">Blog</a></li></ol>
         <h1 class="display">{inline(post['title'])}</h1>
         <p class="post-meta"><time datetime="{post['date']}">{pretty}</time> · By {inline(post['author'])}</p>
       </div>
@@ -130,7 +147,7 @@ def render_post(post, newer, older):
           {link(older, "Previous post")}
           {link(newer, "Next post")}
         </nav>
-        <p class="post-all"><a class="link-arrow" href="{{{{root}}}}resources/#blog">All posts</a></p>
+        <p class="post-all"><a class="link-arrow" href="{{{{root}}}}blog/">All posts</a></p>
       </div>
     </section>
 """
@@ -142,9 +159,10 @@ MONTHS = ["January", "February", "March", "April", "May", "June", "July",
 
 def main():
     layout = (SRC / "layout.html").read_text(encoding="utf-8")
+    POSTS[:] = load_posts()
     for src_file in sorted((SRC / "pages").glob("*.html")):
         print("built", build_page(src_file, layout))
-    posts = load_posts()
+    posts = POSTS
     for i, post in enumerate(posts):
         newer = posts[i - 1] if i > 0 else None
         older = posts[i + 1] if i + 1 < len(posts) else None
