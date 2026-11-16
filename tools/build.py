@@ -56,6 +56,7 @@ def build_text(name, text, layout):
     html = html.replace("{{description}}", meta.get("description", ""))
     html = html.replace("{{page_class}}", meta.get("class", ""))
     html = html.replace("{{canonical_path}}", "" if path.endswith(".html") else path)
+    html = html.replace("{{robots}}", '<meta name="robots" content="noindex, nofollow">' if meta.get("noindex") else "")
     for key in NAV_KEYS:
         current = ' aria-current="page"' if meta.get("nav") == key else ""
         html = html.replace("{{current_" + key + "}}", current)
