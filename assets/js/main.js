@@ -302,4 +302,37 @@
       img.addEventListener("error", fail);
     });
   }
+
+  /* Analytics consent: Google Analytics stays off until the visitor accepts. */
+  function initConsent() {
+    var KEY = "dare-consent";
+    function saved() { try { return localStorage.getItem(KEY); } catch (e) { return null; } }
+    function save(v) {
+      try { localStorage.setItem(KEY, v); } catch (e) {}
+      if (typeof window.gtag === "function") {
+        window.gtag("consent", "update", { analytics_storage: v === "granted" ? "granted" : "denied" });
+      }
+    }
+    function close() { var el = document.getElementById("consent-banner"); if (el) el.remove(); }
+    function open() {
+      if (document.getElementById("consent-banner")) return;
+      var el = document.createElement("div");
+      el.id = "consent-banner";
+      el.className = "consent-banner";
+      el.setAttribute("role", "dialog");
+      el.setAttribute("aria-label", "Cookie preferences");
+      el.innerHTML = '<p>We use Google Analytics cookies to see, in aggregate, how people use this site. They are off unless you say yes. <a href="' + document.querySelector(".brand").getAttribute("href") + 'privacy/">Privacy policy</a></p>' +
+        '<div class="consent-actions"><button type="button" class="btn consent-decline" data-consent="denied">Decline</button><button type="button" class="btn btn-ember consent-accept" data-consent="granted">Accept</button></div>';
+      el.addEventListener("click", function (e) {
+        var v = e.target.getAttribute && e.target.getAttribute("data-consent");
+        if (v) { save(v); close(); }
+      });
+      document.body.appendChild(el);
+    }
+    $$("[data-cookie-settings]").forEach(function (a) {
+      a.addEventListener("click", function (e) { e.preventDefault(); open(); });
+    });
+    if (!saved()) open();
+  }
+  initConsent();
 })();

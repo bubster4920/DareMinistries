@@ -18,7 +18,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../assets/css/style.css?v=5b5efc0a">
+  <link rel="stylesheet" href="../assets/css/style.css?v=6109eaf2">
   <script>
     (function () {
       var b = new URLSearchParams(location.search).get("brand");
@@ -32,10 +32,13 @@
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
+    gtag('consent', 'default', { analytics_storage: 'denied', ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied', wait_for_update: 500 });
+    try { if (localStorage.getItem('dare-consent') === 'granted') gtag('consent', 'update', { analytics_storage: 'granted' }); } catch (e) {}
+    gtag('set', 'url_passthrough', false);
     gtag('js', new Date());
     gtag('config', 'G-6LZTWCE2M3', { allow_google_signals: false, allow_ad_personalization_signals: false });
   </script>
-  <script src="../assets/js/main.js?v=e112a28b" defer></script>
+  <script src="../assets/js/main.js?v=0afdb5b6" defer></script>
 </head>
 <body class="">
   <a class="skip-link" href="#main">Skip to content</a>
@@ -105,7 +108,7 @@
       <div class="container container-narrow prose">
         <p>Protecting your private information is our priority. This policy applies to dareministries.org and to Dare Ministries.</p>
         <h3 class="h3">What we collect</h3>
-        <p>This website does not use accounts or advertising trackers. We use Google Analytics to understand, in aggregate, how visitors find and use the site (for example which pages are viewed and roughly what region visitors come from). Google Analytics sets cookies in your browser and receives your IP address and basic device and browser information; we have turned off Google's advertising features and data sharing. You can opt out with Google's browser add-on at tools.google.com/dlpage/gaoptout or by blocking cookies. Beyond that, we only receive personal information you choose to send us, such as your name, email address, phone number or mailing address when you email us, fill out a form, register for an event or give.</p>
+        <p>This website does not use accounts or advertising trackers. We use Google Analytics to understand, in aggregate, how visitors find and use the site (for example which pages are viewed and roughly what region visitors come from). Analytics cookies are off until you click Accept on the cookie banner; you can change your choice any time with the Cookie settings link in the footer. If you accept, Google Analytics receives your IP address and basic device and browser information; we have turned off Google's advertising features and data sharing. You can also opt out with Google's browser add-on at tools.google.com/dlpage/gaoptout. Beyond that, we only receive personal information you choose to send us, such as your name, email address, phone number or mailing address when you email us, fill out a form, register for an event or give.</p>
         <h3 class="h3">Forms and giving</h3>
         <p>Registration forms, newsletter sign-ups and online giving are handled by our church management provider, Breeze ChMS (dareministries.breezechms.com). Information you submit there is governed by their privacy practices as well as ours. Embedded videos are served by YouTube in privacy-enhanced mode and only load when you press play.</p>
         <h3 class="h3">How we use it</h3>
@@ -168,7 +171,7 @@
 
       <div class="footer-bottom">
         <p>&copy; <span data-year>2026</span> Dare Ministries. A 501(c)(3) nonprofit. Gifts are tax-deductible as allowed by law.</p>
-        <p><a href="../privacy/">Privacy</a> · <a href="../give/">Give</a> · <a href="../connect/">Contact</a></p>
+        <p><a href="../privacy/">Privacy</a> · <a href="#cookie-settings" data-cookie-settings>Cookie settings</a> · <a href="../give/">Give</a> · <a href="../connect/">Contact</a></p>
       </div>
     </div>
   </footer>

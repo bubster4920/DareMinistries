@@ -802,3 +802,10 @@ body.menu-open .brand-switch { display: none; }
 .hab-steps p { color: var(--muted); font-size: 15.5px; }
 @media (max-width: 960px) { .ep-grid { grid-template-columns: repeat(2, 1fr); } .hab-steps { grid-template-columns: 1fr; } }
 @media (max-width: 520px) { .ep-grid { grid-template-columns: 1fr; } }
+
+/* Cookie consent banner */
+.consent-banner { position: fixed; left: 16px; right: 16px; bottom: 16px; z-index: 1000; max-width: 640px; margin: 0 auto; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 14px 20px; padding: 18px 22px; background: var(--ink); color: var(--paper); border: 1px solid var(--line-light); border-radius: var(--radius-sm); box-shadow: var(--shadow); font-size: 14.5px; line-height: 1.5; }
+.consent-banner p { margin: 0; flex: 1 1 280px; }
+.consent-banner a { color: var(--gold); }
+.consent-actions { display: flex; gap: 10px; }
+.consent-decline { background: transparent; color: var(--paper); border: 1px solid var(--line-light); }

@@ -32,6 +32,9 @@
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
+    gtag('consent', 'default', { analytics_storage: 'denied', ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied', wait_for_update: 500 });
+    try { if (localStorage.getItem('dare-consent') === 'granted') gtag('consent', 'update', { analytics_storage: 'granted' }); } catch (e) {}
+    gtag('set', 'url_passthrough', false);
     gtag('js', new Date());
     gtag('config', 'G-6LZTWCE2M3', { allow_google_signals: false, allow_ad_personalization_signals: false });
   </script>
@@ -149,7 +152,7 @@
 
       <div class="footer-bottom">
         <p>&copy; <span data-year>2026</span> Dare Ministries. A 501(c)(3) nonprofit. Gifts are tax-deductible as allowed by law.</p>
-        <p><a href="{{root}}privacy/">Privacy</a> · <a href="{{root}}give/">Give</a> · <a href="{{root}}connect/">Contact</a></p>
+        <p><a href="{{root}}privacy/">Privacy</a> · <a href="#cookie-settings" data-cookie-settings>Cookie settings</a> · <a href="{{root}}give/">Give</a> · <a href="{{root}}connect/">Contact</a></p>
       </div>
     </div>
   </footer>
