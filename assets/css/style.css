@@ -348,6 +348,7 @@ body.menu-open .site-header { color: var(--white); background: transparent; box-
 /* ---------- Stats ---------- */
 .stats { display: grid; grid-template-columns: repeat(4, 1fr); border-top: 1px solid var(--line); margin-top: clamp(48px, 7vw, 88px); }
 .on-dark .stats { border-color: var(--line-light); }
+.stats.stats-3 { grid-template-columns: repeat(3, 1fr); }
 .stat { padding: 28px 24px 0 0; }
 .stat + .stat { padding-left: 24px; border-left: 1px solid var(--line); }
 .on-dark .stat + .stat { border-color: var(--line-light); }
