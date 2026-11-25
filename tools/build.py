@@ -20,7 +20,7 @@ HEADER_RE = re.compile(r"^\s*<!--(\{.*?\})-->\s*", re.S)
 
 ASSET_RE = re.compile(r'(assets/(?:css|js)/[\w-]+\.(?:css|js))"')
 
-NAV_KEYS = ["home", "about", "ministries", "resources", "blog", "connect", "give"]
+NAV_KEYS = ["home", "about", "ministries", "ireland", "resources", "blog", "connect", "give"]
 POSTS = []  # filled by main() before pages are built
 
 
