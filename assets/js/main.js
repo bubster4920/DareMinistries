@@ -23,6 +23,7 @@
     initCalculator();
     initLibraryFilter();
     initContactForm();
+    initMailchimpForm();
     initImageFallbacks();
     $$("[data-year]").forEach(function (el) { el.textContent = new Date().getFullYear(); });
   });
@@ -272,6 +273,46 @@
       window.location.href = "mailto:" + to + "?subject=" + encodeURIComponent("[Website] " + topic) + "&body=" + encodeURIComponent(body);
       var ok = $("[data-form-ok]", form);
       if (ok) ok.hidden = false;
+    });
+  }
+
+  /* Ireland email signup: posts to Mailchimp (JSONP, so no server is needed) and shows the result in place.
+     Without JavaScript the form still works: it submits to Mailchimp in a new tab. */
+  function initMailchimpForm() {
+    var form = $("[data-mailchimp-form]");
+    if (!form) return;
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      if (!form.reportValidity()) return;
+      var note = $("[data-form-ok]", form);
+      var btn = $("button[type=submit]", form);
+      var params = [];
+      new FormData(form).forEach(function (v, k) { params.push(encodeURIComponent(k) + "=" + encodeURIComponent(v)); });
+      var cb = "mcCallback" + Date.now();
+      var script = document.createElement("script");
+      var done = false;
+      function finish(msg) {
+        if (done) return;
+        done = true;
+        delete window[cb];
+        script.remove();
+        if (btn) btn.disabled = false;
+        if (note) { note.hidden = false; note.textContent = msg; }
+      }
+      window[cb] = function (res) {
+        if (res && res.result === "success") {
+          form.reset();
+          finish("Thank you! Check your email and confirm your subscription to finish signing up.");
+        } else {
+          var msg = (res && res.msg ? String(res.msg) : "").replace(/<[^>]*>/g, "").replace(/^\d+\s*-\s*/, "");
+          finish(msg || "Something went wrong. Please try again.");
+        }
+      };
+      script.onerror = function () { finish("Something went wrong. Please try again."); };
+      setTimeout(function () { finish("Something went wrong. Please try again."); }, 15000);
+      if (btn) btn.disabled = true;
+      script.src = form.action.replace("/subscribe/post", "/subscribe/post-json") + "&" + params.join("&") + "&c=" + cb;
+      document.body.appendChild(script);
     });
   }
 
