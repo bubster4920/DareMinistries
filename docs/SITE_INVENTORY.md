@@ -15,7 +15,6 @@ Crawled 23 October 2026. This is the audit of the current WordPress site that th
 | Emails | info@, college@, Questions@dareministries.com |
 | Phone | (719) 375-1187 (college page) |
 | Social | Instagram @dareministries, Facebook /DareMinistries, YouTube (UCKFDMGEEfibkeCgHDhESWvg), Truth in Two YouTube (UCRbdz1f1fxWRn6YPDOkt6HA), Facebook /truthin2, Linktree /dareministries, X @dareministries |
-| Merch | dareministriesmerch.square.site |
 | Back office | Breeze ChMS (dareministries.breezechms.com) for giving and every form |
 
 ## 2. Current sitemap
