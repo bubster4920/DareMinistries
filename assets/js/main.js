@@ -357,4 +357,27 @@
     if (!saved()) open();
   }
   initConsent();
+
+  /* Conversion events for Google Analytics / Google Ads. Only fires when gtag exists;
+     with analytics consent denied, Google receives no cookies or identifiers. */
+  function initTracking() {
+    function send(name, link, extra) {
+      if (typeof window.gtag !== "function") return;
+      var p = { link_url: link.href, link_text: (link.textContent || "").trim().slice(0, 60), page_path: location.pathname };
+      for (var k in extra) p[k] = extra[k];
+      window.gtag("event", name, p);
+    }
+    document.addEventListener("click", function (e) {
+      var a = e.target.closest && e.target.closest("a[href]");
+      if (!a) return;
+      var h = a.href || "";
+      if (h.indexOf("breezechms.com/give") > -1) send("give_click", a, { fund: (h.match(/fund_id=(\d+)/) || [])[1] || "general" });
+      else if (h.indexOf("breezechms.com/form") > -1) send("form_click", a);
+      else if (h.indexOf("mailto:") === 0) send("contact_click", a, { email: h.replace("mailto:", "").split("?")[0] });
+      else if (/youtube\.com\/(watch|playlist|@)|youtu\.be\/|podcasts\.apple\.com|spotify\.com|castbox\.fm|iheart\.com|music\.amazon\.com\/podcasts|goodpods\.app/.test(h)) send("podcast_click", a);
+      else if (h.indexOf("onebigwednesday.org") > -1) send("event_site_click", a);
+      else if (h.indexOf("yetiwillrejoice.org") > -1) send("podcast_site_click", a);
+    });
+  }
+  initTracking();
 })();
